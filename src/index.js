@@ -1,7 +1,3 @@
-window.addEventListener('load', () => {
-    game.initialize();
-});
-
 const game = {
     area: {
         initialize: () => {
@@ -19,5 +15,35 @@ const game = {
     initialize: () => {
         console.log("Iniciando jogo...");
         game.area.initialize();
+        game.screens.initial.initialize();
     },
+
+    screens: {
+        initial:{
+            initialize: () => {
+
+            }
+        },
+
+        play: {
+            initialize: () => {
+                game.animationFrameId = requestAnimationFrame(game.screens.play.loop);
+            },
+
+            loop: () => {
+                console.log("Loop do jogo");
+                game.animationFrameId = requestAnimationFrame(game.screens.play.loop);
+            }
+        },
+
+        last: {
+            initialize: () => {
+                cancelAnimationFrame(game.animationFrameId);
+            }
+        }
+    }
 }
+
+window.addEventListener('load', () => {
+    game.initialize();
+});
